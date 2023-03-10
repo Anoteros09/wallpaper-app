@@ -24,13 +24,13 @@ const Wallpaper = () => {
           aria-describedby="basic-addon2"
           value={query}
           onChange={(e) => setQuery(e.target.value)}
-          className="search-input"
+          className="rounded-3 py-2 px-4 search-input"
         />
         <Button
           variant="outline-secondary"
           id="button-addon2"
           onClick={searchImages}
-          className="search-button"
+          className="rounded-3 py-2 px-3 search-button"
         >
           <FaSearch />
         </Button>
@@ -38,7 +38,7 @@ const Wallpaper = () => {
       <div className="row">
         {results.map((result) => (
           <div className="col-md-4 my-3" key={result.id}>
-            <Card className="wallpaper-card">
+            <Card className="border-0 shadow-sm h-100 wallpaper-card">
               <Card.Img
                 variant="top"
                 src={result.urls.regular}
@@ -49,7 +49,7 @@ const Wallpaper = () => {
                 <Button
                   variant="primary"
                   href={result.links.download}
-                  className="download-button"
+                  className="rounded-3 px-4 py-2 float-end download-button"
                 >
                   Download
                 </Button>
