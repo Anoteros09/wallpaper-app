@@ -1,8 +1,14 @@
 import React, { useState } from "react";
 import { FaSearch } from "react-icons/fa";
-import { InputGroup, FormControl, Button, Card } from "react-bootstrap";
+import {
+  InputGroup,
+  FormControl,
+  Button,
+  Card,
+  Col,
+  Row,
+} from "react-bootstrap";
 import axios from "axios";
-import "./Wallpaper.css";
 
 const Wallpaper = () => {
   const [query, setQuery] = useState("");
@@ -13,6 +19,19 @@ const Wallpaper = () => {
       `https://api.unsplash.com/search/photos/?client_id=${process.env.REACT_APP_UNSPLASH_API_KEY}&query=${query}`
     );
     setResults(response.data.results);
+  };
+
+  const getColSize = () => {
+    const width = window.innerWidth;
+    if (width > 1199) {
+      return 4;
+    } else if (width > 991) {
+      return 3;
+    } else if (width > 767) {
+      return 2;
+    } else {
+      return 1;
+    }
   };
 
   return (
@@ -35,9 +54,9 @@ const Wallpaper = () => {
           <FaSearch />
         </Button>
       </InputGroup>
-      <div className="row">
+      <Row xs={1} sm={2} md={getColSize()} className="g-4">
         {results.map((result) => (
-          <div className="col-md-4 my-3" key={result.id}>
+          <Col key={result.id}>
             <Card className="border-0 shadow-sm h-100 wallpaper-card">
               <Card.Img
                 variant="top"
@@ -55,9 +74,9 @@ const Wallpaper = () => {
                 </Button>
               </Card.Body>
             </Card>
-          </div>
+          </Col>
         ))}
-      </div>
+      </Row>
     </div>
   );
 };
