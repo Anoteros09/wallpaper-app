@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { FaSearch } from "react-icons/fa";
 import { InputGroup, FormControl, Button, Card } from "react-bootstrap";
 import axios from "axios";
+import "./Wallpaper.css";
 
 const Wallpaper = () => {
   const [query, setQuery] = useState("");
@@ -23,11 +24,13 @@ const Wallpaper = () => {
           aria-describedby="basic-addon2"
           value={query}
           onChange={(e) => setQuery(e.target.value)}
+          className="search-input"
         />
         <Button
           variant="outline-secondary"
           id="button-addon2"
           onClick={searchImages}
+          className="search-button"
         >
           <FaSearch />
         </Button>
@@ -35,11 +38,19 @@ const Wallpaper = () => {
       <div className="row">
         {results.map((result) => (
           <div className="col-md-4 my-3" key={result.id}>
-            <Card>
-              <Card.Img variant="top" src={result.urls.regular} />
+            <Card className="wallpaper-card">
+              <Card.Img
+                variant="top"
+                src={result.urls.regular}
+                className="card-image"
+              />
               <Card.Body>
                 <Card.Title>{result.alt_description}</Card.Title>
-                <Button variant="primary" href={result.links.download}>
+                <Button
+                  variant="primary"
+                  href={result.links.download}
+                  className="download-button"
+                >
                   Download
                 </Button>
               </Card.Body>
